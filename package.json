@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/Skylar-Harwell/Employee_Tracking_App#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "figlet": "^1.5.2",
     "inquirer": "^8.1.2",
     "mysql2": "^2.3.0"
   }
