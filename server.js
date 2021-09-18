@@ -90,7 +90,7 @@ function addRole() {
       console.log(err);
       return;
     }
-    console.log(departments);
+    // console.log(departments);
     const deptArr = [];
     departments.forEach((newDept) => {
       deptArr.push({
