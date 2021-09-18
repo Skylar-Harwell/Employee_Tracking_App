@@ -76,7 +76,7 @@ function addDepartment() {
           if (err) {
             console.log(err);
           }
-          console.log(res);
+          console.log('Department Added Successfully!!');
         }
       );
       promptUser();
@@ -178,7 +178,7 @@ function addEmployee() {
           if (err) {
             console.log(err);
           }
-          console.log(res);
+          console.log('Employee Added Successfully!!');
           promptUser();
         }
       );
@@ -192,7 +192,7 @@ function updateRole() {
       if (err) {
         console.log(err);
       }
-      console.log(res);
+    //   console.log(res);
       const decision = [];
       res.forEach((choice) => {
         decision.push({
@@ -206,7 +206,7 @@ function updateRole() {
           console.log(err);
           return;
         }
-        console.log(roles);
+        // console.log(roles);
         const rolesArr = [];
         roles.forEach((newRole) => {
           rolesArr.push({
@@ -222,7 +222,6 @@ function updateRole() {
             choices: decision,
           })
           .then(function (answer) {
-            // let value = answer.employee.split(" ");
             inquirer
               .prompt({
                 name: "employee",
@@ -231,26 +230,13 @@ function updateRole() {
                 choices: rolesArr,
               })
               .then(function (data) {
-                // let option = "";
-                // switch (answer.employee) {
-                //   case "First Name":
-                //     option = "firstName";
-                //     break;
-                //   case "Last Name":
-                //     option = "lastName";
-                //     break;
-                //   case "Role ID":
-                //     option = "roleID";
-                //     break;
-                //   case "Manager ID":
-                //     option = "mgrID";
-                //     break;
                 db.query(
                   `UPDATE employee SET role_id = "${data.employee}" WHERE id_emp = ${answer.updateEmployee}`,
                   function (err) {
                     if (err) {
-                      console.log(err);
+                        console.log(err);
                     }
+                    console.log('Employee Updated Successfully!!');
                     promptUser();
                   }
                 );
@@ -261,83 +247,83 @@ function updateRole() {
   );
 }
 
-function deleteDept() {
-    const sql = `SELECT * FROM department`;
-      db.query(sql, (err, dept) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        console.log(dept);
-        const remDeptArr = [];
-        dept.forEach((choice) => {
-          remDeptArr.push({
-            name: choice.dept_name,
-            value: choice.id_dept,
-          });
-        });
-  inquirer
-    .prompt([
-      {
-        name: "department",
-        type: "rawlist",
-        message: "Which Department needs to be deleted?",
-        choices: remDeptArr,
-      },
-    ])
-    .then(function (res) {
-      var bye = "DELETE FROM department WHERE dept_name = ?";
-      db.query(bye, [res.department], function (err, res) {
-        if (err) {
-          console.log(err);
-        }
-        promptUser();
-      });
-    });
-})
-}
+// function deleteDept() {
+//     const sql = `SELECT * FROM department`;
+//       db.query(sql, (err, dept) => {
+//         if (err) {
+//           console.log(err);
+//           return;
+//         }
+//         console.log(dept);
+//         const remDeptArr = [];
+//         dept.forEach((choice) => {
+//           remDeptArr.push({
+//             name: choice.dept_name,
+//             value: choice.id_dept,
+//           });
+//         });
+//   inquirer
+//     .prompt([
+//       {
+//         name: "department",
+//         type: "rawlist",
+//         message: "Which Department needs to be deleted?",
+//         choices: remDeptArr,
+//       },
+//     ])
+//     .then(function (res) {
+//       var bye = "DELETE FROM department WHERE dept_name = ?";
+//       db.query(bye, [res.department], function (err, res) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         promptUser();
+//       });
+//     });
+// })
+// }
 
-function deleteRole() {
-  inquirer
-    .prompt([
-      {
-        name: "role",
-        type: "rawlist",
-        message: "Which Role needs to be deleted?",
-        choices: roles.title,
-      },
-    ])
-    .then(function (res) {
-      var bye = "DELETE FROM roles WHERE name = ?";
-      db.query(bye, [res.role], function (err, res) {
-        if (err) {
-          console.log(err);
-        }
-        promptUser();
-      });
-    });
-}
+// function deleteRole() {
+//   inquirer
+//     .prompt([
+//       {
+//         name: "role",
+//         type: "rawlist",
+//         message: "Which Role needs to be deleted?",
+//         choices: roles.title,
+//       },
+//     ])
+//     .then(function (res) {
+//       var bye = "DELETE FROM roles WHERE name = ?";
+//       db.query(bye, [res.role], function (err, res) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         promptUser();
+//       });
+//     });
+// }
 
-function deleteEmp() {
-  inquirer
-    .prompt([
-      {
-        name: "employee",
-        type: "rawlist",
-        message: "Which Employee needs to be deleted?",
-        choices: employee.first_name,
-      },
-    ])
-    .then(function (res) {
-      var bye = "DELETE FROM employee WHERE name = ?";
-      db.query(bye, [res.employee], function (err, res) {
-        if (err) {
-          console.log(err);
-        }
-        promptUser();
-      });
-    });
-}
+// function deleteEmp() {
+//   inquirer
+//     .prompt([
+//       {
+//         name: "employee",
+//         type: "rawlist",
+//         message: "Which Employee needs to be deleted?",
+//         choices: employee.first_name,
+//       },
+//     ])
+//     .then(function (res) {
+//       var bye = "DELETE FROM employee WHERE name = ?";
+//       db.query(bye, [res.employee], function (err, res) {
+//         if (err) {
+//           console.log(err);
+//         }
+//         promptUser();
+//       });
+//     });
+// }
 
 function promptUser() {
   inquirer
@@ -354,9 +340,9 @@ function promptUser() {
           "Add a Role",
           "Add an Employee",
           "Update an Employee Role",
-          "Delete a Department",
-          "Delete a Role",
-          "Delete an Employee",
+        //   "Delete a Department",
+        //   "Delete a Role",
+        //   "Delete an Employee",
           "Exit",
         ],
       },
@@ -384,15 +370,15 @@ function promptUser() {
         case "Update an Employee Role":
           updateRole();
           break;
-        case "Delete a Department":
-          deleteDept();
-          break;
-        case "Delete a Role":
-          deleteRole();
-          break;
-        case "Delete an Employee":
-          deleteEmp();
-          break;
+        // case "Delete a Department":
+        //   deleteDept();
+        //   break;
+        // case "Delete a Role":
+        //   deleteRole();
+        //   break;
+        // case "Delete an Employee":
+        //   deleteEmp();
+        //   break;
         case "Exit":
           db.end();
           break;
@@ -401,5 +387,3 @@ function promptUser() {
       }
     });
 }
-
-// promptUser();
